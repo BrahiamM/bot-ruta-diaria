@@ -1,25 +1,23 @@
-
 name: Reporte Diario Clima y Ruta
 
 on:
   schedule:
-    # 11:00 UTC equivale a las 6:00 AM en Colombia (UTC-5), de Lunes a Sábado (1-6)
     - cron: '0 11 * * 1-6'
-  workflow_dispatch: # Habilita un botón manual en GitHub para probar cuando quieras
+  workflow_dispatch:
 
 jobs:
   notificar:
     runs-on: ubuntu-latest
     steps:
-      - name: 1. Descargar código del repositorio
+      - name: Descargar codigo
         uses: actions/checkout@v4
 
-      - name: 2. Configurar Node.js
+      - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: 3. Ejecutar script de alerta
+      - name: Ejecutar script de alerta
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
